@@ -1,0 +1,134 @@
+[
+    {
+        "id": "4e6cb85.dc42048",
+        "type": "inject",
+        "z": "756bdcaa.17d3a4",
+        "name": "選択肢初期化",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "cc08c3b7.dd0178"
+            ]
+        ]
+    },
+    {
+        "id": "cc08c3b7.dd0178",
+        "type": "function",
+        "z": "756bdcaa.17d3a4",
+        "name": "選択肢生成",
+        "func": "const map = new Map();\n\nmap.set(\"model a\", {name: \"a\", value: 1})\n   .set(\"model b\", {name: \"b\", value: 2})\n   .set(\"model c\", {name: \"c\", value: 3});\n  \nmsg.options = Array.from(map.entries())\n                   .map(([k, v]) => { \n                       obj = {}; \n                       obj[k] = v; \n                       return obj\n                   });\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "3a85aff8.d65bc",
+                "900fcb98.d581d"
+            ]
+        ]
+    },
+    {
+        "id": "3a85aff8.d65bc",
+        "type": "debug",
+        "z": "756bdcaa.17d3a4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "options",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "900fcb98.d581d",
+        "type": "ui_dropdown",
+        "z": "756bdcaa.17d3a4",
+        "name": "",
+        "label": "選択",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "4f35fd8d.b3758c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "",
+                "value": "",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "",
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [
+                "68c0b865.9973a8"
+            ]
+        ]
+    },
+    {
+        "id": "68c0b865.9973a8",
+        "type": "ui_text",
+        "z": "756bdcaa.17d3a4",
+        "group": "4f35fd8d.b3758c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "選択結果",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 700,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4f35fd8d.b3758c",
+        "type": "ui_group",
+        "z": "",
+        "name": "デフォルト",
+        "tab": "bf6aa840.fd448",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "bf6aa840.fd448",
+        "type": "ui_tab",
+        "z": "",
+        "name": "ホーム",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
